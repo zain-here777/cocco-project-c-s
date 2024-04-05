@@ -12,9 +12,9 @@ function CartBtn({product}) {
             productId: product.id,
             name: product.name,
             quantity: product.quantity,
-           description : product.description,
+            description: product.description,
             price: product.price,
-            images : product.images[0].src
+            images: product.images[0].src
         })
             .then(response => {
                 console.log('The Products are Added to Cart', response.data)
