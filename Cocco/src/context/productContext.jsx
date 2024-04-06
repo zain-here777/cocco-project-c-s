@@ -1,6 +1,5 @@
 import {createContext, useContext, useState, useEffect} from 'react';
 import axios from 'axios';
-import {addCartToWoo} from './addCartToWoo.js'
 
 const ProductContext = createContext();
 
@@ -20,6 +19,7 @@ const updateJson = () => {
 // Provided Component that will be wrapped to the whole project to send the data //
 export const ProductProvider = ({children}) => {
     const [products, setProducts] = useState([]);
+    const [isLoading , setIsLoading] = useState(true)
     const [cart, setCart] = useState(updateJson());
     const [quantity, setQuantity] = useState(1)
     const PRODUCT_API_URL = "https://localhost/wordpress/wp-json/wc/v3/products";
@@ -33,6 +33,7 @@ export const ProductProvider = ({children}) => {
                 }
             });
             setProducts(response.data);
+            setIsLoading(false)
         } catch (error) {
             console.error('Error fetching products: ', error);
         }
@@ -61,7 +62,7 @@ export const ProductProvider = ({children}) => {
         }
     };
     return (
-        <ProductContext.Provider value={{products, addToCart, cart, setCart, quantity, addCartToWoo}}>
+        <ProductContext.Provider value={{products, addToCart, cart, setCart, quantity, isLoading}}>
             {children}
         </ProductContext.Provider>
     );

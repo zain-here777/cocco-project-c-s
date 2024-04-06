@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/cocco', {
     .catch(err => console.log(err));
 
 app.post('/api/cart', async (req, res) => {
-    const {productId ,price, name, quantity, images, description} = req.body;
+    const {productId ,price, name, quantity, images} = req.body;
 
     if (!productId) {
         return res.status(400).json({message: 'Invalid request Parameters'});
@@ -33,7 +33,6 @@ app.post('/api/cart', async (req, res) => {
         name,
         quantity,
         images,
-        description
     });
     await cartItem.save();
     res.status(200).json({message: "The Data is added to the Cart!"})

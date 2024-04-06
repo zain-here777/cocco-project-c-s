@@ -3,11 +3,11 @@ import {useProductContext} from "../context/productContext.jsx";
 import {Link} from "react-router-dom";
 
 function AddCart() {
-    const {cart ,setCart } = useProductContext();
+    const {cart, setCart} = useProductContext();
 
-    const removeProductFromCart = (productID ) => {
-       const  updatedCart = cart.filter(product => product.id !== productID);
-       localStorage.setItem('Cart', JSON.stringify(updatedCart))
+    const removeProductFromCart = (productID) => {
+        const updatedCart = cart.filter(product => product.id !== productID);
+        localStorage.setItem('Cart', JSON.stringify(updatedCart))
         setCart(updatedCart)
     }
     return (
@@ -34,7 +34,7 @@ function AddCart() {
                                 <td>
                                     <div className='cart-product'>
 
-                                                <img src={product.images[0].src} alt="" style={{maxWidth: '80px'}}/>
+                                        <img src={product.images[0].src} alt="" style={{maxWidth: '80px'}}/>
 
                                         <p>{product.name}</p>
                                     </div>
@@ -50,9 +50,12 @@ function AddCart() {
                     }
                     </tbody>
                 </table>
-                <Link to='/checkout'><button className='btn popular-cart-btn'>Proceed to Checkout</button></Link>
+                {
+                    cart.length > 0 ? <Link to='/checkout'>
+                        <button className='btn popular-cart-btn'>Proceed to Checkout</button>
+                    </Link> : ""
+                }
             </div>
-
         </>
     )
 }

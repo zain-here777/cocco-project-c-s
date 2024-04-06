@@ -12,7 +12,6 @@ function CartBtn({product}) {
             productId: product.id,
             name: product.name,
             quantity: product.quantity,
-            description: product.description,
             price: product.price,
             images: product.images[0].src
         })
